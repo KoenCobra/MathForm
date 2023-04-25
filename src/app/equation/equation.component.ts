@@ -1,30 +1,27 @@
 import {Component, OnInit} from '@angular/core';
 import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {CustomValidators} from "../custom-validators";
-import {delay} from "rxjs";
+import {delay, filter} from "rxjs";
 
 @Component({
   selector: 'app-equation',
   templateUrl: './equation.component.html',
   styleUrls: ['./equation.component.scss']
 })
-export class EquationComponent implements OnInit{
+export class EquationComponent implements OnInit {
   ngOnInit(): void {
     this.mathForm.statusChanges
       .pipe(
+        filter(value => value === 'VALID'),
         delay(200)
       )
-      .subscribe((value)=>{
-     if (value === 'INVALID'){
-       return
-     }
-
-     this.mathForm.setValue({
-       a:this.randomNumber(),
-       b:this.randomNumber(),
-       answer:''
-     })
-    })
+      .subscribe(() => {
+        this.mathForm.setValue({
+          a: this.randomNumber(),
+          b: this.randomNumber(),
+          answer: ''
+        })
+      })
   }
 
   mathForm = new FormGroup({
