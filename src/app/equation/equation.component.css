@@ -13,15 +13,17 @@ input {
   text-align: center;
 }
 
-input:focus{
+input:focus {
   outline: none;
 }
 
-.stats{
+.stats {
   position: absolute;
   bottom: 100px;
   left: 0;
-  right:0;
+  right: 0;
   text-align: center;
   font-size: 24px;
 }
+
+/*# sourceMappingURL=equation.component.css.map */
