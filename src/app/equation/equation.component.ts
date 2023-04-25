@@ -1,4 +1,4 @@
-import {Component} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {CustomValidators} from "../custom-validators";
 
@@ -7,7 +7,21 @@ import {CustomValidators} from "../custom-validators";
   templateUrl: './equation.component.html',
   styleUrls: ['./equation.component.scss']
 })
-export class EquationComponent {
+export class EquationComponent implements OnInit{
+  ngOnInit(): void {
+    this.mathForm.statusChanges.subscribe((value)=>{
+     if (value === 'INVALID'){
+       return
+     }
+
+     this.mathForm.setValue({
+       a:this.randomNumber(),
+       b:this.randomNumber(),
+       answer:''
+     })
+    })
+  }
+
   mathForm = new FormGroup({
     a: new FormControl(this.randomNumber()),
     b: new FormControl(this.randomNumber()),
