@@ -1,5 +1,5 @@
 import {Component} from '@angular/core';
-import { FormControl, FormGroup} from "@angular/forms";
+import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {CustomValidators} from "../custom-validators";
 
 @Component({
@@ -13,7 +13,7 @@ export class EquationComponent {
     b: new FormControl(this.randomNumber()),
     answer: new FormControl('')
   }, [
-    CustomValidators.addition
+    CustomValidators.addition('answer', 'a', 'b')
   ])
 
   get a() {
